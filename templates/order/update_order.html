@@ -1,0 +1,45 @@
+
+        <form action="{% url 'update' order.id %}" method="post">
+            {% csrf_token %}
+            <h1>Edit Customer Order</h1>
+            <div>
+                <div>
+                <label for="">Customer</label>
+                <input type="text" name="cust" value="{{order.customer_id}}" >  </div><br>
+                <div>
+                <label for="">Product</label>
+                <input type="text" name="cust" value="{{order.product_id}}" ></div><br>
+                <div>
+                <label for="">Price</label>
+                <input type="number" name="price" id="price" value="{{order.unit_price}}" ></div><br>
+                <div>
+                <label for="">Quentity</label>
+                <input type="number" name="quentity" id="qty" value="{{order.qty}}"></div><br>
+                <div>
+                <label for="">Total Price</label>
+                <input type="number" name="totalprice" id="totalprice" value="{{order.total_price}}" ></div><br>
+                <div>
+                <input type="submit" value="Edit">
+                </div>
+            </div>
+        </form>
+        <div>
+
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+        </script>
+    <script>
+        $('#qty').keyup(function () {
+    
+            var quentity = $('#qty').val();
+            var price = $('#price').val();
+            if (quentity >= 100){
+            alert("Quatity Less Than 100")
+        }
+            var total = quentity * price
+            $('#totalprice').val(total);
+        });
+    </script>
+

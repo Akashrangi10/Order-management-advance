@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <div>
+                    <label for="">Customer</label>
+
+                    <select name="customers" id="">
+
+                        {% for i in all_customer %}
+                        <option value="{{i.id}}">{{i.first_name}}</option>
+                        {% endfor %}
+                    </select>
+
+                </div><br>
+                <div>
+                    <label for="">Product</label>
+
+                    <select name="products" id="products">
+                        <option value="">---select product---</option>
+                        {% for product in all_product %}
+                        <option value="{{product.id}}" unitprice='{{product.unit_proce}}'>{{product.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div><br>
+                <div>
+                    <label for="">Price</label>
+                    <!-- <label style="padding:64px;" id="unitprice">-</label> -->
+                    
+                    <input type="number" name="price" id="unitprice" value="{{product.unit_proce}}" readonly>
+                    
+
+                </div><br>
+                <div>
+                    <label for="">Quentity</label>
+                    <input type="number" name="quentity" id="quentity" required>
+                </div><br>
+                <div>
+                    <label for="">Total Price</label>
+                    <!-- <label style="padding:64px;" id="totalprice">-</label> -->
+
+                    <input type="number" name="totalprice" id="totalprice" readonly>
+                </div><br>
+                <div>
+                    <input type="submit" value="Create Order">
+                </div>
+            </div>
+        </form>
+        <div>
+ 
+        </div>
+    <p>{{product.unit_price}}</p>
+</body>
+
+</html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+    </script>
+<script>
+    $("#quentity").keyup(function () {
+        var unit_price = $('#unitprice').val();
+        var quentity = $('#quentity').val();
+        if (quentity >= 100){
+            alert("Quatity Less Than 100")
+        }
+        var total = unit_price * quentity
+        
+        $('#totalprice').val(total);
+    });
+    $('#products').change(function () {
+        if ($(this).val()) {
+            var unitprice = $(this).find('option:selected').attr('unitprice');
+            $('#unitprice').val(unitprice);
+        }
+        else {
+            $('#unitprice').val(0);
+        }
+    });
+</script>

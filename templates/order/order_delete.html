@@ -1,0 +1,5 @@
+<p>Are you Sure You Want to Delete {{order.customer_id}} Order</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+</form>

@@ -1,0 +1,30 @@
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Place Order">
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+    </script>
+<script>
+    $("#id_qty").keyup(function () {
+        var unit_price = $('#id_unit_price').val();
+        var quentity = $('#id_qty').val();
+        var total = unit_price * quentity
+        $('#id_total_price').val(total);
+    });
+    $('#id_product_id').change(function () {
+        if ($(this).val()) {
+            var unitprice = $(this).find('option:selected').attr('value');
+            $('#id_unit_price').val(unitprice);
+        }
+        else {
+            $('#id_unit_price').val(0);
+        }
+
+
+
+    });
+</script>
