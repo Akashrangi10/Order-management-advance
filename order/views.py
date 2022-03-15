@@ -14,7 +14,6 @@ def index_view(request):
     return render (request,'order/index.html',context=context)
 
 # Create Order
-
 def create_order(request):
     customer = Customer.objects.values("id","first_name")
     product = Product.objects.values("id","name","unit_proce")
@@ -24,13 +23,7 @@ def create_order(request):
         product = request.POST['products']
         prices = request.POST['price']
         total =request.POST['totalprice']
-        print(prices,'=====================Price')
-        print(total,'=================total')
-        print(customer)
-        print(product)
-        customer_id=Customer.objects.get(id=customer)
-        product_id=Product.objects.get(id=product)
-        order =Order.objects.create(customer_id=customer_id,product_id =product_id,unit_price =prices,
+        Order.objects.create(customer_id_id=customer,product_id_id =product,unit_price =prices,
         qty=request.POST['quentity'],
         total_price= total
         )
@@ -40,37 +33,7 @@ def create_order(request):
         return render(request,'order/create_order2.html',{'all_customer':customer,'all_product':product})
 
 
-# def create_order_view(request,order_id = None):
-#     if order_id != 0:
-#         order1 = Order.objects.get(pk=order_id)
-#         form = OrderForm(instance=order1)
-#     else:
-#         form = OrderForm()
-#     if request.method == 'POST':
-#         form = OrderForm(request.POST)
-#         if form.is_valid():
-#             if order_id == 0:
-#                 form1 = form.save(commit=False)
-#                 quantity = form1.qty
-#                 price = form1.unit_price
-#                 form1.total_price = price*quantity
-#                 form.save()
-#                 return redirect ('index')
-#             else:
-#                 form = OrderForm(request.POST,instance=order1)
-#                 form2 = form.save(commit=False)
-#                 quantity = form2.qty
-#                 price = form2.unit_price
-#                 form2.total_price = price*quantity
-#                 form2.save()
-#                 return redirect ('index')
 
-#     context = {
-#         'form':form
-#     }
-#     return render (request,'order/create_order.html',context=context)
-
-# delete customer order
 
 def delete_order_view(request,orders_id):
     order = Order.objects.get(pk=orders_id)
